@@ -255,6 +255,23 @@ class Chat extends Base {
     }
 
     /**
+     * Returns whether the chat is currently typing.
+     * @returns {Promise<boolean>} typing
+     */
+    async isTyping() {
+        return this.client.pupPage.evaluate(chatId => {
+            chatId = window.Store.WidFactory.createWid(chatId);
+            const state = window.Store.ChatState.get(chatId);
+            if (!state) return false;
+            if (typeof state.isComposing === 'boolean') return state.isComposing;
+            if (typeof state.composing === 'boolean') return state.composing;
+            if (typeof state.typing === 'boolean') return state.typing;
+            if (state.chatstate) return state.chatstate === 'composing';
+            return false;
+        }, this.id._serialized);
+    }
+
+    /**
      * Returns the Contact that corresponds to this Chat.
      * @returns {Promise<Contact>}
      */

@@ -77,6 +77,11 @@ describe('Chat', function () {
         expect(contact.id._serialized).to.equal(chat.id._serialized);
     });
 
+    it('can get typing state', async function () {
+        const typing = await chat.isTyping();
+        expect(typing).to.be.a('boolean');
+    });
+
     describe('Seen', function () {
         it('can mark a chat as unread', async function () {
             await chat.markUnread();

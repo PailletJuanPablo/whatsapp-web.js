@@ -1579,6 +1579,8 @@ declare namespace WAWebJS {
         sendStateRecording: () => Promise<void>,
         /** Simulate typing in chat. This will last for 25 seconds. */
         sendStateTyping: () => Promise<void>,
+        /** Returns whether the chat is currently typing */
+        isTyping: () => Promise<boolean>,
         /** un-archives this chat */
         unarchive: () => Promise<void>,
         /** Unmutes this chat */
